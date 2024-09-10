@@ -36,3 +36,8 @@ func Paginate[T any](list []T, pageNo, pageSize int64) []T {
 	}
 	return list[start:end]
 }
+
+// DelSliceElement 删除切片中某个下标的元素
+func DelSliceElement[T any](list []T, idx int) []T {
+	return append(list[:idx], list[idx+1:]...)
+}
