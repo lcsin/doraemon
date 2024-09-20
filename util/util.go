@@ -41,3 +41,16 @@ func Paginate[T any](list []T, pageNo, pageSize int64) []T {
 func DelSliceElement[T any](list []T, idx int) []T {
 	return append(list[:idx], list[idx+1:]...)
 }
+
+// RemoveDuplicates slice去重
+func RemoveDuplicates[E comparable](slice []E) []E {
+	set := make(map[E]struct{})
+	var res []E
+	for _, v := range slice {
+		if _, ok := set[v]; !ok {
+			set[v] = struct{}{}
+			res = append(res, v)
+		}
+	}
+	return res
+}
