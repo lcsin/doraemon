@@ -78,8 +78,8 @@ func CopyDir(src, dst string, ignores []string) error {
 }
 
 // FileMD5 获取文件MD5
-func FileMD5(src string) (string, error) {
-	file, err := os.Open(src)
+func FileMD5(fp string) (string, error) {
+	file, err := os.Open(fp)
 	if err != nil {
 		return "", err
 	}
