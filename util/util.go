@@ -54,3 +54,25 @@ func RemoveDuplicates[E comparable](slice []E) []E {
 	}
 	return res
 }
+
+// ExtractTextBetweenWildcards 提取被通配符包含的内容包含通配符本身
+func ExtractTextBetweenWildcards(text, start, end string) []string {
+	var result []string
+	var stack []int
+
+	for i := 0; i < len(text); i++ {
+		if i+len(start) <= len(text) && text[i:i+len(start)] == start {
+			stack = append(stack, i)
+			i += len(start) - 1
+		} else if i+len(end) <= len(text) && text[i:i+len(end)] == end && len(stack) > 0 {
+			startIndex := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+
+			extracted := text[startIndex : i+len(end)]
+			result = append(result, extracted)
+			i += len(end) - 1
+		}
+	}
+
+	return result
+}

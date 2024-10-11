@@ -16,3 +16,8 @@ func TestRemoveDuplicates(t *testing.T) {
 	slice = RemoveDuplicates(slice)
 	fmt.Println(slice)
 }
+
+func TestExtractTextBetweenWildcards(t *testing.T) {
+	text := "这是一段包含[[姓名]]的[文本]"
+	fmt.Println(ExtractTextBetweenWildcards(text, "[", "]")) // [[姓名] [[姓名]] [文本]]
+}
