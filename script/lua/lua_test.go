@@ -18,7 +18,7 @@ func InitRedis() redis.Cmdable {
 
 func TestLuaScriptLock(t *testing.T) {
 	rdb := InitRedis()
-	res, err := rdb.Eval(context.Background(), RedisDistributeLock, []string{"lock"}, "test10086", 5*60).Int()
+	res, err := rdb.Eval(context.Background(), RedisDistributeLock, []string{"lockname"}, "uniqueID", 5*60).Int()
 	if err != nil {
 		panic(err)
 	}
@@ -27,7 +27,7 @@ func TestLuaScriptLock(t *testing.T) {
 
 func TestLuaScriptUnlock(t *testing.T) {
 	rdb := InitRedis()
-	res, err := rdb.Eval(context.Background(), RedisDistributeUnLock, []string{"lock"}, "test10086").Int()
+	res, err := rdb.Eval(context.Background(), RedisDistributeUnLock, []string{"lockname"}, "uniqueID").Int()
 	if err != nil {
 		panic(err)
 	}

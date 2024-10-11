@@ -12,11 +12,11 @@ func TestBalancedHolder(t *testing.T) {
 	dict["<"] = ">"
 
 	text := "a{nihao}b,c[nihao]d,<nihao>.aaa"
-	fmt.Println(BalancedPlaceholder(text, dict))
+	fmt.Println(BalancedPlaceholder(text, dict)) // true
 
 	text = "a{nihao},b{nihao},c[<sdfsf>]"
-	fmt.Println(BalancedPlaceholder(text, dict))
+	fmt.Println(BalancedPlaceholder(text, dict)) // true
 
 	text = "{<>[]<}}"
-	fmt.Println(BalancedPlaceholder(text, dict))
+	fmt.Println(BalancedPlaceholder(text, dict)) // false
 }
