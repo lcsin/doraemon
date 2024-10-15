@@ -21,3 +21,19 @@ func TestExtractTextBetweenWildcards(t *testing.T) {
 	text := "这是一段包含[[姓名]]的[文本]"
 	fmt.Println(ExtractTextBetweenWildcards(text, "[", "]")) // [[姓名] [[姓名]] [文本]]
 }
+
+func TestBalancedWildcards(t *testing.T) {
+	dict := make(map[string]string, 0)
+	dict["{"] = "}"
+	dict["["] = "]"
+	dict["<"] = ">"
+
+	text := "a{nihao}b,c[nihao]d,<nihao>.aaa"
+	fmt.Println(BalancedWildcards(text, dict)) // true
+
+	text = "a{nihao},b{nihao},c[<sdfsf>]"
+	fmt.Println(BalancedWildcards(text, dict)) // true
+
+	text = "{<>[]<}}"
+	fmt.Println(BalancedWildcards(text, dict)) // false
+}

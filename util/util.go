@@ -76,3 +76,38 @@ func ExtractTextBetweenWildcards(text, start, end string) []string {
 
 	return result
 }
+
+// BalancedWildcards 判断文本中的通配符对是否配对
+func BalancedWildcards(text string, dict map[string]string) bool {
+	if len(text) == 0 {
+		return false
+	}
+
+	stack := make([]string, 0, len(text))
+	left := make(map[string]bool, len(dict)/2)
+	right := make(map[string]bool, len(dict)/2)
+	reverse := make(map[string]string, len(dict))
+	for k, v := range dict {
+		reverse[v] = k
+	}
+
+	for k, v := range dict {
+		left[k] = true
+		right[v] = true
+	}
+
+	for _, v := range text {
+		str := string(v)
+		switch true {
+		case left[str]: // 左边直接入栈
+			stack = append(stack, str)
+		case right[str]: // 右边判断是否匹配
+			if len(stack) == 0 || stack[len(stack)-1] != reverse[str] {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+
+	return len(stack) == 0
+}
