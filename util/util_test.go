@@ -13,7 +13,7 @@ func TestUtil(t *testing.T) {
 
 func TestRemoveDuplicates(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 4, 5, 6}
-	slice = RemoveDuplicates(slice)
+	slice = RemoveSliceDuplicates(slice)
 	fmt.Println(slice)
 }
 
